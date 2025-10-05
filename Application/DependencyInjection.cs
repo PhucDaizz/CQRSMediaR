@@ -1,8 +1,10 @@
 ﻿using Application.Common.Behaviours;
+using Application.Common.Interfaces;
+using Application.Services;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using FluentValidation;
 
 namespace Application
 {
@@ -15,6 +17,8 @@ namespace Application
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
+            services.AddScoped<IProductService, ProductService>();
 
             return services;
         }
